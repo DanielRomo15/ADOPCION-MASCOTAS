@@ -7,10 +7,10 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.conf import settings
 
-# CLIENTE
+# personas
 
-class Cliente(models.Model):
-    id_cliente = models.AutoField(primary_key=True)
+class Personas(models.Model):
+    id_personas = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     cedula = models.IntegerField(unique=True)
@@ -18,7 +18,7 @@ class Cliente(models.Model):
     telefono = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.id_cliente}: {self.nombre} {self.apellido} {self.cedula}"
+        return f"{self.id_cliente}: {self.nombre} {self.apellido}"
 
 class Producto(models.Model):
     id_producto = models.AutoField(primary_key=True)
