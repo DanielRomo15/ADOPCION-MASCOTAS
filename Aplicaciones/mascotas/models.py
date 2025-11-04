@@ -37,7 +37,7 @@ class Producto(models.Model):
 
 # Empresa
 
-class Empresa(models.Model):
+class Adopcion(models.Model):
     id_empresa = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=150)
     ruc = models.CharField(max_length=20, unique=True)
