@@ -20,19 +20,16 @@ class Personas(models.Model):
     def __str__(self):
         return f"{self.id_cliente}: {self.nombre} {self.apellido}"
 
-class Producto(models.Model):
-    id_producto = models.AutoField(primary_key=True)
+class Mascotas(models.Model):
+    id_mascota = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
-    fechaIngreso = models.DateField()
-    categoria = models.CharField(max_length=100)
-    stock = models.PositiveIntegerField()
-    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    Tipo = models.CharField(max_length=100)
+    Raza = models.PositiveIntegerField()
     observaciones = models.TextField(null=True, blank=True)
-    logo = models.FileField(upload_to='productos', null=True, blank=True)
-    activo = models.BooleanField(default=True)  # Nuevo campo
+    logo = models.FileField(upload_to='mascotas', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.id_producto}: {self.nombre} ({self.categoria}) [{self.fechaIngreso}] Stock: {self.stock}"
+        return f"{self.id_mascota}: {self.nombre}"
 
 
 
