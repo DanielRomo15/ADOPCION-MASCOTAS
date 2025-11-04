@@ -24,7 +24,7 @@ class Mascotas(models.Model):
     id_mascota = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     Tipo = models.CharField(max_length=100)
-    Raza = models.PositiveIntegerField()
+    Raza = models.CharField(max_length=100)
     observaciones = models.TextField(null=True, blank=True)
     logo = models.FileField(upload_to='mascotas', null=True, blank=True)
 
