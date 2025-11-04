@@ -38,11 +38,12 @@ class Producto(models.Model):
 
 class Adopcion(models.Model):
     id_adpcion = models.AutoField(primary_key=True)
+    id_mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
+    id_personas = models.ForeignKey(Personas, on_delete=models.PROTECT)
     fecha_adopcion = models.CharField(max_length=150)
     estado_adopcion = models.CharField(max_length=20, unique=True)
     observaciones = models.CharField(max_length=200)
-    id_personas = models.ForeignKey(Personas, on_delete=models.PROTECT)
-    id_mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
+    
     
 
     def __str__(self):
