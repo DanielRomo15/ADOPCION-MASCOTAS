@@ -41,8 +41,6 @@ class Adopcion(models.Model):
     fecha_adopcion = models.CharField(max_length=150)
     estado_adopcion = models.CharField(max_length=20, unique=True)
     observaciones = models.CharField(max_length=200)
-    telefono = models.CharField(max_length=30)
-    email = models.EmailField()
     id_personas = models.ForeignKey(Personas, on_delete=models.PROTECT)
     id_mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
     
