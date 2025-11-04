@@ -35,16 +35,17 @@ class Producto(models.Model):
         return f"{self.id_producto}: {self.nombre} ({self.categoria}) [{self.fechaIngreso}] Stock: {self.stock}"
 
 
-# Empresa
 
 class Adopcion(models.Model):
-    id_empresa = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=150)
-    ruc = models.CharField(max_length=20, unique=True)
-    direccion = models.CharField(max_length=200)
+    id_adpcion = models.AutoField(primary_key=True)
+    fecha_adopcion = models.CharField(max_length=150)
+    estado_adopcion = models.CharField(max_length=20, unique=True)
+    observaciones = models.CharField(max_length=200)
     telefono = models.CharField(max_length=30)
     email = models.EmailField()
-    logo = models.FileField(upload_to='empresa', null=True, blank=True)
+    id_personas = models.ForeignKey(Personas, on_delete=models.PROTECT)
+    id_mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
+    
 
     def __str__(self):
         return f"{self.nombre} ({self.ruc})"
