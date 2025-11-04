@@ -35,7 +35,7 @@ class Mascotas(models.Model):
 
 class Adopcion(models.Model):
     id_adpcion = models.AutoField(primary_key=True)
-    id_mascota = models.ForeignKey(Mascota, on_delete=models.PROTECT)
+    id_mascotas = models.ForeignKey(Mascota, on_delete=models.PROTECT)
     id_personas = models.ForeignKey(Personas, on_delete=models.PROTECT)
     fecha_adopcion = models.CharField(max_length=150)
     estado_adopcion = models.CharField(max_length=20, unique=True)
@@ -45,31 +45,3 @@ class Adopcion(models.Model):
 
     def __str__(self):
         return f"{self.nombre} ({self.ruc})"
-#VENTAS
-class Venta(models.Model):
-    id_venta = models.AutoField(primary_key=True)
-    cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
-    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    fecha = models.DateTimeField(default=timezone.now)
-    total = models.DecimalField(max_digits=12, decimal_places=2)
-
-    def __str__(self):
-        return f"Venta #{self.id_venta} - {self.cliente} - {self.fecha.strftime('%Y-%m-%d %H:%M')}"
-
-class DetalleVenta(models.Model):
-    venta = models.ForeignKey('Venta', on_delete=models.CASCADE, related_name='detalles')
-    producto = models.ForeignKey('Producto', on_delete=models.PROTECT)
-    nombre_producto = models.CharField(max_length=200)
-    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
-    cantidad = models.PositiveIntegerField()
-    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def save(self, *args, **kwargs):
-        if not self.pk:  # Solo al crear
-            self.nombre_producto = self.producto.nombre
-            self.precio_unitario = self.producto.precio_unitario
-            self.subtotal = self.precio_unitario * self.cantidad
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"{self.nombre_producto} x {self.cantidad} (Venta #{self.venta.id_venta})"
